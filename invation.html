@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Wedding Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    background: #e9e4db;
+    font-family: 'Cormorant Garamond', serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+/* ❤️ Hearts */
+.hearts {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.heart {
+    position: absolute;
+    bottom: -20px;
+    font-size: 20px;
+    animation: floatUp linear infinite;
+    opacity: 0.6;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-100vh) scale(1.4); opacity: 0; }
+}
+
+/* Countdown */
+.countdown-box {
+    margin-top: 30px;
+    padding: 15px 25px;
+    border: 2px solid #c9a24a;
+    border-radius: 15px;
+    background: #f8f6f3;
+    font-size: 30px;
+    letter-spacing: 4px;
+    z-index: 1;
+}
+
+/* Card */
+.card {
+    width: 90%;
+    max-width: 500px;
+    margin: 30px auto;
+    background: #f8f6f3;
+    padding: 50px 30px;
+    border-radius: 15px;
+    text-align: center;
+    z-index: 1;
+}
+
+/* Names */
+.names {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 65px;
+}
+
+.name {
+    animation: float 4s ease-in-out infinite;
+}
+
+.name:nth-child(3) {
+    animation-delay: 1s;
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.names span {
+    font-size: 28px;
+    color: #c9a24a;
+}
+
+/* Date */
+.date {
+    margin-top: 40px;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.time {
+    font-size: 18px;
+    letter-spacing: 3px;
+    margin-top: 5px;
+}
+
+/* Hall */
+.hall {
+    margin-top: 35px;
+    font-size: 32px;
+    font-weight: 600;
+    color: #c9a24a;
+}
+
+/* Club */
+.club {
+    font-size: 18px;
+    margin-top: 8px;
+    letter-spacing: 4px;
+}
+
+/* Map */
+.map {
+    width: 90%;
+    max-width: 500px;
+    margin-bottom: 40px;
+    z-index: 1;
+}
+
+iframe {
+    width: 100%;
+    height: 250px;
+    border: none;
+    border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Hearts -->
+<div class="hearts" id="hearts"></div>
+
+<!-- Countdown -->
+<div class="countdown-box">
+    <div id="countdown">00 : 00 : 00 : 00</div>
+</div>
+
+<!-- Card -->
+<div class="card">
+
+    <div class="names">
+        <div class="name">Yasser</div>
+        <span>&</span>
+        <div class="name">Mariam</div>
+    </div>
+
+    <div class="date">5-7-2026</div>
+    <div class="time">AT 7 PM</div>
+
+    <div class="hall">Almasa Hall</div>
+    <div class="club">Nady El Fath</div>
+
+</div>
+
+<!-- Map -->
+<div class="map">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d54559.30404496803!2d30.03963644882219!3d31.27729836648228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f5c4e9469aaaab%3A0xab39831b3f51bffa!2z2YbYp9iv2Yog2KfZhNmB2KrYrSDYp9mE2LHZitin2LbZiiAoINmB2YbYr9mCINio2KfZhNmFICk!5e0!3m2!1sar!2seg!4v1777155294689!5m2!1sar!2seg"></iframe>
+</div>
+
+<script>
+// Countdown
+var countDownDate = new Date("July 5, 2026 19:00:00").getTime();
+
+setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+
+    var d = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var s = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerHTML =
+        d + " : " + h + " : " + m + " : " + s;
+}, 1000);
+
+// Hearts generator
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (5 + Math.random() * 4) + "s";
+    heart.style.fontSize = (15 + Math.random() * 20) + "px";
+
+    document.getElementById("hearts").appendChild(heart);
+
+    setTimeout(() => heart.remove(), 9000);
+}
+
+setInterval(createHeart, 400);
+</script>
+
+</body>
+</html>
+```
