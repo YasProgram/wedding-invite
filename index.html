@@ -8,148 +8,85 @@
 <title>Wedding Invitation</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
-
-<!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-body {
-    margin: 0;
-    background: #e9e4db;
-    font-family: 'Cormorant Garamond', serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-x: hidden;
+body{
+    margin:0;
+    background:#e9e4db;
+    font-family:'Cormorant Garamond',serif;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 
-/* ❤️ Hearts */
-.hearts {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    top: 0;
-    left: 0;
-    z-index: 0;
+/* ❤️ floating hearts */
+.hearts{position:fixed;inset:0;pointer-events:none;}
+.heart{position:absolute;bottom:-20px;animation:floatUp linear infinite;opacity:.6;}
+@keyframes floatUp{
+    0%{transform:translateY(0);opacity:0;}
+    20%{opacity:1;}
+    100%{transform:translateY(-100vh);opacity:0;}
 }
 
-.heart {
-    position: absolute;
-    bottom: -20px;
-    animation: floatUp linear infinite;
-    opacity: 0.6;
+/* ❤️ heart */
+.heart-box{
+    margin-top:20px;
+    position:relative;
+}
+.percent{
+    position:absolute;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    font-size:22px;
+    font-weight:bold;
 }
 
-@keyframes floatUp {
-    0% { transform: translateY(0); opacity: 0; }
-    20% { opacity: 1; }
-    100% { transform: translateY(-100vh); opacity: 0; }
+/* timer */
+.countdown-box{
+    display:flex;gap:10px;margin-top:10px;
+}
+.time-box{
+    background:#fff;border:2px solid #c9a24a;
+    border-radius:10px;padding:10px;min-width:60px;
+}
+.time-box span{font-size:22px;font-weight:bold;}
+.time-box small{font-size:10px;color:#c9a24a;}
+
+.time-box.tick span{
+    animation:fade .4s ease;
+}
+@keyframes fade{
+    0%{opacity:.3;transform:scale(1.3);}
+    100%{opacity:1;transform:scale(1);}
 }
 
-/* Countdown */
-.countdown-box {
-    margin-top: 20px;
-    padding: 12px 20px;
-    border: 2px solid #c9a24a;
-    border-radius: 15px;
-    background: #f8f6f3;
-    font-size: 24px;
-    letter-spacing: 3px;
-    z-index: 1;
+/* card */
+.card{
+    width:90%;max-width:420px;margin-top:15px;
+    background:#fff;padding:20px;border-radius:12px;
+    text-align:center;
 }
 
-/* Card */
-.card {
-    width: 92%;
-    max-width: 500px;
-    margin: 20px auto;
-    background: #f8f6f3;
-    padding: 30px 20px;
-    border-radius: 15px;
-    text-align: center;
-    z-index: 1;
+.names{
+    display:flex;justify-content:center;gap:15px;
+    font-family:'Great Vibes',cursive;font-size:52px;
+}
+.name{
+    animation:float 4s ease-in-out infinite;
+}
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-6px);}
 }
 
-/* Names */
-.names {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(40px, 8vw, 65px);
-}
+.row{display:flex;justify-content:center;gap:8px;margin:10px 0;}
+.row i{color:#c9a24a;}
+.hall{font-size:24px;color:#c9a24a;font-weight:bold;}
 
-.name {
-    animation: float 4s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-}
-
-.names span {
-    font-size: 22px;
-    color: #c9a24a;
-}
-
-/* Info rows */
-.info {
-    margin-top: 25px;
-}
-
-.row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin: 10px 0;
-    font-size: 20px;
-}
-
-.row i {
-    color: #c9a24a;
-}
-
-/* Hall */
-.hall {
-    font-size: 26px;
-    font-weight: 600;
-    color: #c9a24a;
-}
-
-/* Club */
-.club {
-    font-size: 16px;
-    letter-spacing: 2px;
-}
-
-/* Map */
-.map {
-    width: 92%;
-    max-width: 500px;
-    margin-bottom: 30px;
-    z-index: 1;
-}
-
-iframe {
-    width: 100%;
-    height: 220px;
-    border: none;
-    border-radius: 10px;
-}
-
-/* Mobile tweaks */
-@media (max-width: 480px) {
-    .countdown-box {
-        font-size: 20px;
-    }
-    .row {
-        font-size: 18px;
-    }
-}
+/* map */
+.map{width:90%;max-width:420px;margin:20px 0;}
+iframe{width:100%;height:220px;border-radius:12px;border:none;}
 </style>
 </head>
 
@@ -157,85 +94,109 @@ iframe {
 
 <div class="hearts" id="hearts"></div>
 
-<!-- Countdown -->
+<!-- ❤️ HEART -->
+<div class="heart-box">
+<svg width="150" height="140" viewBox="0 0 32 29.6">
+<defs>
+<clipPath id="clip">
+<path d="M23.6,0c-3.4,0-6.3,2.1-7.6,5.2C14.7,2.1,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4
+c0,9.5,16,21.2,16,21.2s16-11.7,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+</clipPath>
+</defs>
+
+<path fill="#ddd" d="M23.6,0c-3.4,0-6.3,2.1-7.6,5.2C14.7,2.1,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4
+c0,9.5,16,21.2,16,21.2s16-11.7,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+
+<g clip-path="url(#clip)">
+<rect id="liquid" x="0" y="30" width="32" height="30" fill="red"/>
+</g>
+</svg>
+
+<div class="percent" id="percent">5%</div>
+</div>
+
+<!-- TIMER -->
 <div class="countdown-box">
-    <div id="countdown">00 : 00 : 00 : 00</div>
+<div class="time-box" id="box-days"><span id="days">00</span><small>D</small></div>
+<div class="time-box" id="box-hours"><span id="hours">00</span><small>H</small></div>
+<div class="time-box" id="box-minutes"><span id="minutes">00</span><small>M</small></div>
+<div class="time-box" id="box-seconds"><span id="seconds">00</span><small>S</small></div>
 </div>
 
-<!-- Card -->
+<!-- CARD -->
 <div class="card">
-
-    <div class="names">
-        <div class="name">Yasser</div>
-        <span>&</span>
-        <div class="name">Mariam</div>
-    </div>
-
-    <div class="info">
-
-        <div class="row">
-            <i class="fa-solid fa-calendar-days"></i>
-            <div>5-7-2026</div>
-        </div>
-
-        <div class="row">
-            <i class="fa-solid fa-clock"></i>
-            <div>7:00 PM</div>
-        </div>
-
-        <div class="row hall">
-            <i class="fa-solid fa-champagne-glasses"></i>
-            <div>Almasa Hall</div>
-        </div>
-
-        <div class="row club">
-            <i class="fa-solid fa-location-dot"></i>
-            <div>Nady El Fath</div>
-        </div>
-
-    </div>
-
+<div class="names">
+<div class="name">Yasser</div>
+<div>&</div>
+<div class="name">Mariam</div>
 </div>
 
-<!-- Map -->
+<div class="row"><i class="fa-solid fa-calendar"></i><div>5-7-2026</div></div>
+<div class="row"><i class="fa-solid fa-clock"></i><div>7:00 PM</div></div>
+<div class="row hall"><i class="fa-solid fa-champagne-glasses"></i><div>Almasa Hall</div></div>
+<div class="row"><i class="fa-solid fa-location-dot"></i><div>Nady El Fath</div></div>
+</div>
+
+<!-- MAP -->
 <div class="map">
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d54559.30404496803!2d30.03963644882219!3d31.27729836648228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f5c4e9469aaaab%3A0xab39831b3f51bffa!2z2YbYp9iv2Yog2KfZhNmB2KrYrSDYp9mE2LHZitin2LbZiiAoINmB2YbYr9mCINio2KfZhNmFICk!5e0!3m2!1sar!2seg!4v1777155294689!5m2!1sar!2seg"></iframe>
 </div>
 
 <script>
-// Countdown (fix mobile)
-var countDownDate = new Date(2026, 6, 5, 19, 0, 0).getTime();
+// 🔥 SETTINGS
+const EVENT_DATE = new Date("2026-07-05T19:00:00").getTime();
+const DAYS_TO_FILL = 70;
 
-setInterval(function() {
-    var now = new Date().getTime();
-    var distance = countDownDate - now;
+const START_DATE = EVENT_DATE - (DAYS_TO_FILL*24*60*60*1000);
 
-    var d = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var s = Math.floor((distance % (1000 * 60)) / 1000);
+let prev={};
 
-    document.getElementById("countdown").innerHTML =
-        d + " : " + h + " : " + m + " : " + s;
-}, 1000);
+setInterval(()=>{
+let now=Date.now();
+let dist=EVENT_DATE-now;
 
-// Hearts
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (5 + Math.random() * 4) + "s";
-    heart.style.fontSize = (12 + Math.random() * 18) + "px";
-
-    document.getElementById("hearts").appendChild(heart);
-
-    setTimeout(() => heart.remove(), 9000);
+// timer
+function update(id,val){
+if(prev[id]!==val){
+let box=document.getElementById("box-"+id);
+box.classList.remove("tick");
+void box.offsetWidth;
+box.classList.add("tick");
 }
-setInterval(createHeart, 600);
+document.getElementById(id).innerText=val;
+prev[id]=val;
+}
+
+update("days",Math.floor(dist/(1000*60*60*24)));
+update("hours",Math.floor((dist%(1000*60*60*24))/(1000*60*60)));
+update("minutes",Math.floor((dist%(1000*60*60))/(1000*60)));
+update("seconds",Math.floor((dist%(1000*60))/1000));
+
+// ❤️ progress
+let progress=(now-START_DATE)/(EVENT_DATE-START_DATE);
+progress=0.05+(progress*0.95);
+if(progress>1)progress=1;
+
+percent.innerText=Math.floor(progress*100)+"%";
+
+let h=30-(progress*30);
+liquid.setAttribute("y",h);
+
+},1000);
+
+// floating hearts
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(5+Math.random()*4)+"s";
+h.style.fontSize=(12+Math.random()*18)+"px";
+hearts.appendChild(h);
+setTimeout(()=>h.remove(),9000);
+},600);
 </script>
 
 </body>
 </html>
-```
+
