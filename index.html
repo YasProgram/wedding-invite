@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,9 @@
 <title>Wedding Invitation</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 body {
@@ -33,36 +37,35 @@ body {
 .heart {
     position: absolute;
     bottom: -20px;
-    font-size: 20px;
     animation: floatUp linear infinite;
     opacity: 0.6;
 }
 
 @keyframes floatUp {
-    0% { transform: translateY(0) scale(1); opacity: 0; }
+    0% { transform: translateY(0); opacity: 0; }
     20% { opacity: 1; }
-    100% { transform: translateY(-100vh) scale(1.4); opacity: 0; }
+    100% { transform: translateY(-100vh); opacity: 0; }
 }
 
 /* Countdown */
 .countdown-box {
-    margin-top: 30px;
-    padding: 15px 25px;
+    margin-top: 20px;
+    padding: 12px 20px;
     border: 2px solid #c9a24a;
     border-radius: 15px;
     background: #f8f6f3;
-    font-size: 30px;
-    letter-spacing: 4px;
+    font-size: 24px;
+    letter-spacing: 3px;
     z-index: 1;
 }
 
 /* Card */
 .card {
-    width: 90%;
+    width: 92%;
     max-width: 500px;
-    margin: 30px auto;
+    margin: 20px auto;
     background: #f8f6f3;
-    padding: 50px 30px;
+    padding: 30px 20px;
     border-radius: 15px;
     text-align: center;
     z-index: 1;
@@ -73,78 +76,85 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 20px;
     font-family: 'Great Vibes', cursive;
-    font-size: 65px;
+    font-size: clamp(40px, 8vw, 65px);
 }
 
 .name {
     animation: float 4s ease-in-out infinite;
 }
 
-.name:nth-child(3) {
-    animation-delay: 1s;
-}
-
 @keyframes float {
     0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+    50% { transform: translateY(-6px); }
 }
 
 .names span {
-    font-size: 28px;
+    font-size: 22px;
     color: #c9a24a;
 }
 
-/* Date */
-.date {
-    margin-top: 40px;
-    font-size: 28px;
-    font-weight: 600;
-    letter-spacing: 2px;
+/* Info rows */
+.info {
+    margin-top: 25px;
 }
 
-.time {
-    font-size: 18px;
-    letter-spacing: 3px;
-    margin-top: 5px;
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    font-size: 20px;
+}
+
+.row i {
+    color: #c9a24a;
 }
 
 /* Hall */
 .hall {
-    margin-top: 35px;
-    font-size: 32px;
+    font-size: 26px;
     font-weight: 600;
     color: #c9a24a;
 }
 
 /* Club */
 .club {
-    font-size: 18px;
-    margin-top: 8px;
-    letter-spacing: 4px;
+    font-size: 16px;
+    letter-spacing: 2px;
 }
 
 /* Map */
 .map {
-    width: 90%;
+    width: 92%;
     max-width: 500px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     z-index: 1;
 }
 
 iframe {
     width: 100%;
-    height: 250px;
+    height: 220px;
     border: none;
     border-radius: 10px;
+}
+
+/* Mobile tweaks */
+@media (max-width: 480px) {
+    .countdown-box {
+        font-size: 20px;
+    }
+    .row {
+        font-size: 18px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- Hearts -->
 <div class="hearts" id="hearts"></div>
 
 <!-- Countdown -->
@@ -161,11 +171,29 @@ iframe {
         <div class="name">Mariam</div>
     </div>
 
-    <div class="date">5-7-2026</div>
-    <div class="time">AT 7 PM</div>
+    <div class="info">
 
-    <div class="hall">Almasa Hall</div>
-    <div class="club">Nady El Fath</div>
+        <div class="row">
+            <i class="fa-solid fa-calendar-days"></i>
+            <div>5-7-2026</div>
+        </div>
+
+        <div class="row">
+            <i class="fa-solid fa-clock"></i>
+            <div>7:00 PM</div>
+        </div>
+
+        <div class="row hall">
+            <i class="fa-solid fa-champagne-glasses"></i>
+            <div>Almasa Hall</div>
+        </div>
+
+        <div class="row club">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>Nady El Fath</div>
+        </div>
+
+    </div>
 
 </div>
 
@@ -175,8 +203,8 @@ iframe {
 </div>
 
 <script>
-// Countdown
-var countDownDate = new Date("July 5, 2026 19:00:00").getTime();
+// Countdown (fix mobile)
+var countDownDate = new Date(2026, 6, 5, 19, 0, 0).getTime();
 
 setInterval(function() {
     var now = new Date().getTime();
@@ -191,7 +219,7 @@ setInterval(function() {
         d + " : " + h + " : " + m + " : " + s;
 }, 1000);
 
-// Hearts generator
+// Hearts
 function createHeart() {
     const heart = document.createElement("div");
     heart.className = "heart";
@@ -199,14 +227,13 @@ function createHeart() {
 
     heart.style.left = Math.random() * 100 + "vw";
     heart.style.animationDuration = (5 + Math.random() * 4) + "s";
-    heart.style.fontSize = (15 + Math.random() * 20) + "px";
+    heart.style.fontSize = (12 + Math.random() * 18) + "px";
 
     document.getElementById("hearts").appendChild(heart);
 
     setTimeout(() => heart.remove(), 9000);
 }
-
-setInterval(createHeart, 400);
+setInterval(createHeart, 600);
 </script>
 
 </body>
